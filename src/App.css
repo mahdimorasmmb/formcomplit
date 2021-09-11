@@ -1,20 +1,21 @@
-.form-root{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+body {
+  direction: rtl;
 }
 
+.form-root {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 form {
-    display: flex;
-    flex-flow: column;;
-    width: 300px;
-
+  display: flex;
+  flex-flow: column;
+  width: 300px;
 }
 
 form input {
-    margin: 20px 0;
-    padding: 10px 0;
+  margin: 20px 0;
+  padding: 10px 0;
 }
