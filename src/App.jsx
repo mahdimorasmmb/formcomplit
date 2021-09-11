@@ -2,24 +2,11 @@ import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [firstName, setFitstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState(0);
-  const [nationalCode, setNationalCode] = useState("");
-  const [rules, setrules] = useState([
-    { name: "firstName", message: "نام خود را وارد نمایید", visible: true },
-    {
-      name: "lastName",
-      message: "نام خانوادگی  خود را وارد نمایید",
-      visible: true,
-    },
-    { name: "age", message: "سن خود را وارد نمایید", visible: true },
-    {
-      name: "nationalCode",
-      message: "کد ملی   خود را وارد نمایید",
-      visible: true,
-    },
-  ]);
+  const [firstName, setFitstName] = useState("نام");
+  const [lastName, setLastName] = useState("نام خانوادگی");
+  const [age, setAge] = useState(18);
+  const [nationalCode, setNationalCode] = useState("0000000000");
+
   console.log(firstName);
   const handelsubmit = (e) => {
     e.preventDefault();
@@ -31,99 +18,60 @@ function App() {
           value={firstName}
           onChange={(e) => {
             setFitstName(e.target.value);
-            if (e.target.value) {
-              const newRules = rules.map((rule) => {
-                if (rule.name === "firstName") {
-                  return { ...rule, visible: false };
-                }
-                return rule;
-              });
-              setrules(newRules);
-            } else {
-              const newRules = rules.map((rule) => {
-                if (rule.name === "firstName") {
-                  return { ...rule, visible: true };
-                }
-                return rule;
-              });
-              setrules(newRules);
-            }
           }}
           placeholder="fill your name"
+          style={{
+            border: `solid 2px ${firstName ? "#84f387" : "red"}`,
+          }}
         />
+        {!firstName && (
+          <div style={{ color: "red", fontWeight: "bold", fontSize: 18 }}>
+            نام را وارد کنید{" "}
+          </div>
+        )}
         <input
           value={lastName}
           onChange={(e) => {
             setLastName(e.target.value);
-            if (e.target.value) {
-              const newRules = rules.map((rule) => {
-                if (rule.name === "lastName") {
-                  return { ...rule, visible: false };
-                }
-                return rule;
-              });
-              setrules(newRules);
-            } else {
-              const newRules = rules.map((rule) => {
-                if (rule.name === "lastName") {
-                  return { ...rule, visible: true };
-                }
-                return rule;
-              });
-              setrules(newRules);
-            }
           }}
           placeholder="fill your last name"
+          style={{
+            border: `solid 2px ${lastName ? "#84f387" : "red"}`,
+          }}
         />
+        {!lastName && (
+          <div style={{ color: "red", fontWeight: "bold", fontSize: 18 }}>
+            @نام خواندگی را وارد کنید
+          </div>
+        )}
         <input
           value={age}
           onChange={(e) => {
             setAge(e.target.value);
-            if (e.target.value) {
-              const newRules = rules.map((rule) => {
-                if (rule.name === "age") {
-                  return { ...rule, visible: false };
-                }
-                return rule;
-              });
-              setrules(newRules);
-            } else {
-              const newRules = rules.map((rule) => {
-                if (rule.name === "age") {
-                  return { ...rule, visible: true };
-                }
-                return rule;
-              });
-              setrules(newRules);
-            }
           }}
           placeholder="fill your age"
+          style={{ color: age >= 18 ? "#84f387" : "red" }}
+          required
         />
+        {age < 18 && (
+          <div style={{ color: "red", fontWeight: "bold", fontSize: 18 }}>
+            @سن وارد شده مجاز نیست
+          </div>
+        )}
         <input
           value={nationalCode}
           onChange={(e) => {
             setNationalCode(e.target.value);
-            if (e.target.value) {
-              const newRules = rules.map((rule) => {
-                if (rule.name === "nationalCode") {
-                  return { ...rule, visible: false };
-                }
-                return rule;
-              });
-              setrules(newRules);
-            } else {
-              const newRules = rules.map((rule) => {
-                if (rule.name === "nationalCode") {
-                  return { ...rule, visible: true };
-                }
-                return rule;
-              });
-              setrules(newRules);
-            }
           }}
           placeholder="fill your national code"
+          style={{ color: nationalCode.length !== 10 ? "red" : "#84f387" }}
         />
-        <div>
+        {nationalCode.length !== 10 && (
+          <div style={{ color: "red", fontWeight: "bold", fontSize: 18 }}>
+            @کد ملی صحیح نمی باشد
+          </div>
+        )}
+        {/* <div>
           <ol>
             {rules.map((rule) => (
               <li
@@ -134,7 +82,7 @@ function App() {
               </li>
             ))}
           </ol>
-        </div>
+        </div> */}
 
         <input type="submit" value="Submit" />
       </form>
